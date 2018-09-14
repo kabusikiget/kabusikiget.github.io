@@ -1,0 +1,220 @@
+@charset "utf-8";
+/* CSS Document */
+
+@import url("https://fonts.googleapis.com/css?family=Just+Another+Hand");
+
+/*variabili globali  */
+:root {
+  /*SLIDER */
+  
+ 
+  --big_height: 25vw;
+  --big_nav_width: 12%;/*ai  lati */
+  --small_width: 100%;
+  --small_height:60%;
+  --small_nav_width: 18%;/*ai  lati */
+  --box-shadow: 0 11px 22px rgba(0, 0, 0, 0.20), 0 7px 7px rgba(0, 0, 0, 0.24);
+  /* colori dei pallini */
+  --colordot1: #795548;
+  --colordot2: #2196F3;
+  --colordot3: #4CAF50;
+  --colordot4: #F44336;
+  --nav_color: rgba(6, 185, 255, 0.2);
+  --nav_hover_color: rgba(44, 221, 196, 0.53);
+  --dot-width_big:18px;
+  --dot-height_big:18px;
+  --dot-width_small:12px;
+  --dot-height_small:12px;
+}
+
+#container_slider {
+  margin: 0 auto;
+  margin-top: 100px;
+  position: relative;
+  width:var(100%);
+  /*height: 0;   prima
+  padding-bottom: $big_height;*/
+  height:var( --big_height);
+  user-select: none; /*setto gli input radio a niente, nessuno checked all'utente, (di default parto col primo, settato in html)*/
+  background-color: #1c1c1c;
+  box-shadow: 0 11px 22px rgba(0, 0, 0, 0.2), 0 7px 7px rgba(0, 0, 0, 0.24);
+  
+}
+
+#container_slider input {
+  display: none;
+}
+
+#container_slider .slide_img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#container_slider img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
+#container_slider .prev, #container_slider .next {
+  width:var( --big_nav_width);
+  height: inherit;
+  position: absolute;
+  top: 0;
+  background-color: rgba(6, 185, 255, 0.2);
+  z-index: 99;
+  transition: .45s;
+  cursor: pointer;
+  text-align: center;
+}
+
+#container_slider .next {
+  right: 0;
+}
+
+#container_slider .prev {
+  left: 0;
+}
+
+#container_slider .prev:hover, #container_slider .next:hover {
+  transition: .3s;
+  background-color: rgba(44, 221, 196, 0.53);
+}
+
+#container_slider .prev span, #container_slider .next span {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border: solid 20px;
+  top: 50%;
+  /* per centrare le freccine in verticale */
+  transform: translateY(-50%);
+  /* per centrare le freccine in verticale */
+}
+
+#container_slider .prev span {
+  border-color: transparent #fff transparent transparent;
+  right: 45%;
+  /*right/left: 45%; per "centrare" le freccine in orizzonatale */
+}
+
+#container_slider .next span {
+  border-color: transparent transparent transparent #fff;
+  left: 45%;
+}
+
+#container_slider #nav_slide {
+  /*mini bottoncini sotto */
+  
+  width: 100%;
+  bottom: 12%;
+  height: 11px;
+  position: absolute;
+  text-align: center;
+  z-index: 99;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* per centrare botto */
+}
+
+#container_slider .dots {
+  /*mini button */
+  width:var(--dot-width_big);
+  height:var(--dot-height_big);
+  margin: 0 5px;
+  position: relative;
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: .4s;
+  cursor: pointer;
+}
+
+#container_slider #dot1:hover {
+  background:var( --colordot1);
+}
+
+#container_slider #dot2:hover {
+ background:var( --colordot2);
+}
+
+#container_slider #dot3:hover {
+  background:var( --colordot3);
+}
+
+#container_slider #dot4:hover {
+  background:var( --colordot4);
+}
+
+#container_slider #i1:checked ~ #one,
+#container_slider #i2:checked ~ #two,
+#container_slider #i3:checked ~ #three,
+#container_slider #i4:checked ~ #four {
+  z-index: 9;
+  opacity: 1;
+  animation: scroll 1.4s ease-in-out;
+}
+
+/*quando sei sulla rispettiva slide */
+#i1:checked ~ #nav_slide #dot1 {
+  background: #795548;
+    
+}
+
+#i2:checked ~ #nav_slide #dot2 {
+  background: #F44336;  
+}
+
+#i3:checked ~ #nav_slide #dot3 {
+  background: #2196F3;  
+}
+
+#i4:checked ~ #nav_slide #dot4 {
+  background: #4CAF50;  
+}
+
+@keyframes scroll {
+  from {
+    opacity: .2;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+ 
+
+@media screen and (max-width: 685px) {
+ #container_slider {
+    border: 5px solid black;
+    width:var(--small_width,100%);
+    height:var(--small_height);
+
+  }
+
+  .slide_img .prev, .slide_img .next {
+    width:var(--small_nav_width);
+  }
+
+  .slide_img .prev span, .slide_img .next span {
+    border: solid 12px;
+  }
+
+  .slide_img .prev span {
+    border-color: transparent #fff transparent transparent;
+  }
+
+  .slide_img .next span {
+    border-color: transparent transparent transparent #fff;
+  }
+
+  #nav_slide .dots {
+    width:var(--dot-width_small);
+    height:var(--dot-height_small);
+  }
+}
